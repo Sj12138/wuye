@@ -70,7 +70,7 @@ values (#{rudRidId},#{rudUnId},#{rudDpId},#{head.headId})
   </delete>
   <select id="findRud" resultMap="RudMap" parameterType="cn.com.wy.entity.Rud">
     SELECT  rud.rud_id AS rud_id,rud.rud_ridid AS rud_ridid,
-    rud.rud_unid AS rud_unid,rud.rud_headid AS run_headid,rid.rid_Name AS rud_ridgepole,un.un_Name AS rud_unit,dp.dp_Name AS rudDoorplate
+    rud.rud_unid AS rud_unid,rud.rud_headid AS run_headid,rid.rid_Name AS rud_ridgepole,un.un_Name AS rud_unit,dp.dp_Name AS rud_doorplate
     FROM t_rud rud
     LEFT JOIN t_ridgepole rid ON rud.rud_ridid = rid.rid_id
     LEFT JOIN t_unit un ON rud.rud_unid = un.un_id
