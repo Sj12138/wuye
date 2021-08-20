@@ -88,4 +88,18 @@ public class Rud {
         this.propertyFeeList = propertyFeeList;
     }
 
+    @Override
+    public String toString() {
+        return "Rud{" +
+                "rudId=" + rudId +
+                ", rudRidId=" + rudRidId +
+                ", rudUnId=" + rudUnId +
+                ", rudDpId=" + rudDpId +
+                ", rudRidgepole='" + rudRidgepole + '\'' +
+                ", rudUnit='" + rudUnit + '\'' +
+                ", rudDoorplate='" + rudDoorplate + '\'' +
+                ", head=" + head +
+                ", propertyFeeList=" + propertyFeeList +
+                '}';
+    }
 }

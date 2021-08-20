@@ -396,42 +396,22 @@
 	* 载入数据
 	*/
 	$('#data-datagrid').datagrid({
-		url:'../user/list',
+		url:'../rud/list',
 		rownumbers:true,
 		singleSelect:false,
 		pageSize:20,
 		pagination:true,
 		multiSort:true,
 		fitColumns:true,
-		idField:'userId',
+		idField:'rudId',
 	    treeField:'name',
 		fit:true,
 		columns:[[
 			{ field:'chk',checkbox:true},
-            { field:'userId',title:'id',width:100,sortable:true,hidden:"true"},
-			{ field:'userName',title:'用户名',width:100,sortable:true},
-            { field:'userNum',title:'账号',width:100,sortable:true},
-			{ field:'userPwd',title:'密码',width:100},
-			{ field:'userState',title:'所属角色',width:100,formatter:function(value,row,index){
-                    switch(value){
-                        case 1:{
-                            return '超级管理员';
-                        }
-                        case 2:{
-                            return '管理员';
-                        }
-                        case 3:{
-                            return '物业';
-                        }
-                        case 4:{
-                            return "其他";
-                        }
-                    }
-                    return value;
-                }},
-			{ field:'userSex',title:'性别',width:100},
-			{ field:'userAge',title:'年龄',width:100},
-			{ field:'userAddress',title:'地址',width:200},
+            { field:'rudId',title:'id',width:100,sortable:true,hidden:"true"},
+			{ field:'rudRidgepole',title:'栋',width:100,sortable:true},
+            { field:'rudUnit',title:'单元',width:100,sortable:true},
+			{ field:'userPwd',title:'门牌号',width:100},
 		]],
 		onLoadSuccess:function(data){  
 			$('.authority-edit').linkbutton({text:'编辑权限',plain:true,iconCls:'icon-edit'});  

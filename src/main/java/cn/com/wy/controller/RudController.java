@@ -24,6 +24,9 @@ public class RudController {
         Map<String, Object> ret = new HashMap<String, Object>();
         List<Rud> rudList = rudService.findRud(rud);
         ret.put("rows", rudList);
+        for(Rud rud1 : rudList){
+            System.out.println(rud1);
+        }
         return ret;
     }
 }

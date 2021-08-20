@@ -54,9 +54,9 @@
                     <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../head/list?_mid=${secondMenu.id }" iframe="1">角色管理</a></li>
                 </ul>
             </div>
-            <div title="公共设施管理" style="padding:5px;">
+            <div title="楼房管理" style="padding:5px;">
                 <ul class="easyui-tree wu-side-tree">
-                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../head/list?_mid=${secondMenu.id }" iframe="1">设施管理</a></li>
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../home/rudList?_mid=${secondMenu.id }" iframe="1">房屋管理</a></li>
                 </ul>
             </div>
         </div>
