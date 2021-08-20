@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.wy.dao.PayRecordsDao" >
+  <resultMap id="PayRecordsMap" type="cn.com.wy.entity.PayRecords" >
+    <id column="prc_id" property="prcId"/>
+    <result column="prc_date" property="prcDate"/>
+    <result column="prc_remark" property="prcRemark"/>
+  </resultMap>
+
+</mapper>

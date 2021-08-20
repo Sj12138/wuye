@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.wy.dao.StallDao" >
+  <resultMap id="StallMap" type="cn.com.wy.entity.Stall" >
+    <id column="stall_id" property="stallId"/>
+    <result column="stall_name" property="stallName"/>
+    <result column="stall_carno" property="stallCarNo"/>
+    <result column="stall_state" property="stallState"/>
+    <result column="stall_remark" property="stallRemark"/>
+    <result column="rud_doorplate" property="rudDoorplate"/>
+    <association property="head" column="stall_headid"
+                select="cn.com.wy.dao.HeadDao.findByHeadId">
+    </association>
+  </resultMap>
+
+</mapper>

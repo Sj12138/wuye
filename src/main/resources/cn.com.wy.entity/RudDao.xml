@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.wy.dao.RudDao" >
+  <resultMap id="RudMap" type="cn.com.wy.entity.Rud" >
+    <id column="rud_id" property="rudId"/>
+    <result column="rud_ridid" property="rudRidId"/>
+    <result column="rud_unid" property="rudUnId"/>
+    <result column="rud_dpid" property="rudDpId"/>
+    <result column="rud_ridgepole" property="rudRidgepole"/>
+    <result column="rud_unit" property="rudUnit"/>
+    <result column="rud_doorplate" property="rudDoorplate"/>
+    <!--    <association property="head" column="rud_headid"-->
+    <!--                select="cn.com.wy.dao.HeadDao.findByHeadId">-->
+    <!--    </association>-->
+    <!--    <collection property="propertyFeeList" column="rud_id"-->
+    <!--                 select="cn.com.wy.dao.PropertyFeeDao.findPfByRudId">-->
+    <!--    </collection>-->
+  </resultMap>
+  <select id="findAllRud" resultMap="RudMap">
+SELECT  rud.rud_id AS rud_id,rud.rud_ridid AS rud_ridid,
+rud.rud_unid AS rud_unid,rud.rud_headid AS run_headid,rid.rid_Name AS rud_ridgepole,un.un_Name AS rud_unit,dp.dp_Name AS rudDoorplate
+FROM t_rud rud
+LEFT JOIN t_ridgepole rid ON rud.rud_ridid = rid.rid_id
+LEFT JOIN t_unit un ON rud.rud_unid = un.un_id
+LEFT JOIN t_doorplate dp ON rud.rud_dpid = dp.dp_id
+  </select>
+  <select id="findByHeadId" resultMap="RudMap" parameterType="java.lang.Integer">
+  SELECT  rud.rud_id AS rud_id,rud.rud_ridid AS rud_ridid,
+rud.rud_unid AS rud_unid,rud.rud_headid AS run_headid,rid.rid_Name AS rud_ridgepole,un.un_Name AS rud_unit,dp.dp_Name AS rudDoorplate
+FROM t_rud rud
+LEFT JOIN t_ridgepole rid ON rud.rud_ridid = rid.rid_id
+LEFT JOIN t_unit un ON rud.rud_unid = un.un_id
+LEFT JOIN t_doorplate dp ON rud.rud_dpid = dp.dp_id
+where rud_headid=#{headid}
+</select>
+  <select id="findByRudId" resultMap="RudMap">
+    SELECT  rud.rud_id AS rud_id,rud.rud_ridid AS rud_ridid,
+rud.rud_unid AS rud_unid,rud.rud_headid AS run_headid,rid.rid_Name AS rud_ridgepole,un.un_Name AS rud_unit,dp.dp_Name AS rudDoorplate
+FROM t_rud rud
+LEFT JOIN t_ridgepole rid ON rud.rud_ridid = rid.rid_id
+LEFT JOIN t_unit un ON rud.rud_unid = un.un_id
+LEFT JOIN t_doorplate dp ON rud.rud_dpid = dp.dp_id
+    where  rud_id=#{rudId}
+  </select>
+  <update id="updateRud" parameterType="cn.com.wy.entity.Rud">
+    update t_rud
+    <set>
+      <if test="rudRidId !=null">
+        rud_ridid=#{rudRidId},
+      </if>
+      <if test="rudUnId !=null">
+        rud_unid=#{rudUnId},
+      </if>
+      <if test="rudDpId !=null">
+        rud_dpid=#{rudDpId},
+      </if>
+      <if test="head.headId!=null">
+        rud_headid=#{head.headId},
+      </if>
+    </set>
+    where rud_id=#{rudId}
+  </update>
+  <insert id="addRud" parameterType="cn.com.wy.entity.Rud">
+insert into t_rud (rud_ridid,rud_unid,rud_dpid,rud_headid)
+values (#{rudRidId},#{rudUnId},#{rudDpId},#{head.headId})
+
+  </insert>
+  <delete id="deleteRud">
+    delete from t_rud where rud_id=#{rudId}
+  </delete>
+  <select id="findRud" resultMap="RudMap" parameterType="cn.com.wy.entity.Rud">
+    SELECT  rud.rud_id AS rud_id,rud.rud_ridid AS rud_ridid,
+    rud.rud_unid AS rud_unid,rud.rud_headid AS run_headid,rid.rid_Name AS rud_ridgepole,un.un_Name AS rud_unit,dp.dp_Name AS rudDoorplate
+    FROM t_rud rud
+    LEFT JOIN t_ridgepole rid ON rud.rud_ridid = rid.rid_id
+    LEFT JOIN t_unit un ON rud.rud_unid = un.un_id
+    LEFT JOIN t_doorplate dp ON rud.rud_dpid = dp.dp_id
+    <where>
+      <if test="rudRidgepole != null">
+        and rid.rid_name = #{rudRidgepole}
+      </if>
+      <if test="rudUnit != null">
+        and un.un_name = #{rudUnit}
+      </if>
+      <if test="rudDoorplate != null">
+        and dp.dp_name = #{rudDoorplate}
+      </if>
+    </where>
+  </select>
+</mapper>
+    

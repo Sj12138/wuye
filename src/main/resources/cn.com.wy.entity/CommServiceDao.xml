@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.wy.dao.CommServiceDao" >
+  <resultMap id="CommServiceEntityMap" type="cn.com.wy.entity.CommServiceEntity" >
+    <id column="cs_id" property="csId"/>
+    <result column="cs_date" property="csDate"/>
+    <result column="cs_count" property="csCount"/>
+    <result column="cs_issue" property="csIssue"/>
+    <result column="cs_remark" property="csRemark"/>
+    <association property="communal" column="cs_comid"
+                 select="cn.com.wy.dao.CommunalDao.findComByComId">
+    </association>
+  </resultMap>
+
+</mapper>

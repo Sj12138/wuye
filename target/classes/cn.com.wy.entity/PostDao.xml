@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.wy.dao.PostDao" >
+  <resultMap id="PostMap" type="cn.com.wy.entity.Post" >
+    <id column="post_id" property="postId"/>
+    <result column="post_name" property="postName"/>
+    <result column="postSal" property="post_sal"/>
+    <association property="userList" column="post_id"
+                 select="cn.com.wy.dao.UserDao.findByPostId">
+    </association>
+  </resultMap>
+  <select id="findByPostId" resultMap="PostMap" parameterType="java.lang.Integer">
+    select * from t_post where post_id=#{postid}
+  </select>
+</mapper>

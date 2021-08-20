@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.wy.dao.PropertyFeeDao" >
+  <resultMap id="PropertyFeeMap" type="cn.com.wy.entity.PropertyFee" >
+    <id column="pf_id" property="pfId"/>
+    <result column="pf_money" property="pfMoney"/>
+    <result column="pf_state" property="pfState"/>
+    <result column="pf_type" property="pfType"/>
+    <result column="pf_date" property="pfDate"/>
+    <association property="rud" column="pf_rudid"
+                 select="cn.com.wy.dao.RudDao.findByRudId">
+    </association>
+  </resultMap>
+
+</mapper>

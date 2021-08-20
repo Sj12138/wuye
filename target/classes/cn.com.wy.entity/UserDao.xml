@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.wy.dao.UserDao">
+
+
+    <resultMap id="UserMap" type="cn.com.wy.entity.User">
+        <id column="mana_Id" property="userId"/>
+        <result column="mana_name" property="userName"/>
+        <result column="mana_num" property="userNum"/>
+        <result column="mana_pwd" property="userPwd"/>
+        <result column="mana_state" property="userState"/>
+        <result column="mana_phone" property="userPhone"/>
+        <result column="mana_age" property="userAge"/>
+        <result column="mana_card" property="userCard"/>
+        <result column="mana_address" property="userAddress"/>
+        <result column="mana_sex" property="userSex"/>
+        <!--   <association property="post" column="mana_postid"
+                        select="cn.com.wy.dao.PostDao.findByPostId">
+           </association>-->
+    </resultMap>
+    <select id="findAllUser" resultMap="UserMap">
+        select *
+        from t_user
+        order by mana_state
+    </select>
+
+    <select id="findByUserId" parameterType="int" resultMap="UserMap">
+        select *
+        from t_user
+        where mana_Id = #{id}
+    </select>
+
+    <select id="findByUserNum" parameterType="java.lang.String" resultMap="UserMap">
+        select *
+        from t_user
+        where mana_num = #{num}
+    </select>
+
+    <select id="findByPostId" parameterType="int" resultMap="UserMap">
+        select *
+        from t_user
+        where mana_postid = #{id}
+    </select>
+
+    <update id="updateUser" parameterType="cn.com.wy.entity.User">
+        update t_user
+        <set>
+            <if test="userName != null">
+                mana_name=#{userName},
+            </if>
+            <if test="userNum != null">
+                mana_num=#{userNum},
+            </if>
+            <if test="userPwd != null">
+                mana_pwd=#{userPwd},
+            </if>
+            <if test="userCard != null">
+                mana_card=#{userCard},
+            </if>
+            <if test="userSex != null">
+                mana_sex=#{userSex},
+            </if>
+            <if test="userAge != 0">
+                mana_age=#{userAge},
+            </if>
+            <if test="userPhone != null">
+                mana_phone=#{userPhone},
+            </if>
+            <if test="userAddress != null">
+                mana_address=#{userAddress},
+            </if>
+            <if test="userHonus != 0">
+                mana_honus=#{userHonus},
+            </if>
+            <if test="userState != 0">
+                mana_state=#{userState},
+            </if>
+            <if test="post != null">
+                mana_postid=#{post.postId},
+            </if>
+        </set>
+        where mana_id=#{userId};
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete
+        from t_user
+        where mana_id in
+        <foreach collection="ids" item="id" index="no" open="("
+                 separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="findByUserName" parameterType="java.lang.String" resultMap="UserMap">
+        select *
+        from t_user
+        where mana_name = #{username}
+    </select>
+
+    <select id="findUser" parameterType="cn.com.wy.entity.User" resultMap="UserMap">
+        select * from t_user
+        <where>
+            <if test="userName != null">
+                and mana_name like concat("%",#{userName},"%")
+            </if>
+            <if test="userNum != null">
+                and mana_num like concat("%",#{userNum},"%")
+            </if>
+            <if test="userPwd != null">
+                and mana_pwd=#{userPwd}
+            </if>
+            <if test="userCard != null">
+                and mana_card like concat("%",#{userCard},"%")
+            </if>
+            <if test="userSex != null">
+                and mana_sex=#{userSex}
+            </if>
+            <if test="userAge != 0">
+                and mana_age like concat("%",#{userAge},"%")
+            </if>
+            <if test="userPhone != null">
+                and mana_phone like concat("%",#{userPhone},"%")
+            </if>
+            <if test="userAddress != null">
+                and mana_address like concat("%",#{userAddress},"%")
+            </if>
+            <if test="userHonus != 0">
+                and mana_honus=#{userHonus}
+            </if>
+            <if test="userState != 0">
+                and mana_state=#{userState}
+            </if>
+            <if test="post != null">
+                and mana_postid=#{post.postId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addUser" parameterType="cn.com.wy.entity.User">
+        insert into t_user values(#{userId},#{userName},#{userNum},#{userPwd},#{userCard},#{userSex},#{userAge},#{userPhone},#{userAddress},#{userHonus},#{userState},#{post.postId})
+    </insert>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop.xsd"
+       >
+    <bean id="CommServiceService" class="cn.com.wy.service.Impl.CommServiceServiceImpl" autowire="byType"></bean>
+    <bean id="CommunalService" class="cn.com.wy.service.Impl.CommunalServiceImpl" autowire="byType"></bean>
+    <bean id="HeadService" class="cn.com.wy.service.Impl.HeadServiceImpl" autowire="byType"></bean>
+    <bean id="PayRecordsService" class="cn.com.wy.service.Impl.PayRecordsServiceImpl" autowire="byType"></bean>
+    <bean id="PostService" class="cn.com.wy.service.Impl.PostServiceImpl" autowire="byType"></bean>
+    <bean id="PropertyFeeService" class="cn.com.wy.service.Impl.PropertyFeeServiceImpl" autowire="byType"></bean>
+    <bean id="RepairsService" class="cn.com.wy.service.Impl.RepairsServiceImpl" autowire="byType"></bean>
+    <bean id="RudService" class="cn.com.wy.service.Impl.RudServiceImpl" autowire="byType"></bean>
+    <bean id="StallService" class="cn.com.wy.service.Impl.StallServiceImpl" autowire="byType"></bean>
+    <bean id="UserService" class="cn.com.wy.service.Impl.UserServiceImpl" autowire="byType"></bean>
+</beans>

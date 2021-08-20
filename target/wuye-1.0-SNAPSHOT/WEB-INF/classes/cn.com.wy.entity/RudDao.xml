@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.wy.dao.RudDao" >
+  <resultMap id="RudMap" type="cn.com.wy.entity.Rud" >
+    <id column="rud_id" property="rudId"/>
+    <result column="rud_ridid" property="rudRidId"/>
+    <result column="rud_unid" property="rudUnId"/>
+    <result column="rud_dpid" property="rudDpId"/>
+    <result column="rud_ridgepole" property="rudRidgepole"/>
+    <result column="rud_unit" property="rudUnit"/>
+    <result column="rud_doorplate" property="rudDoorplate"/>
+    <association property="head" column="rud_headid"
+                select="cn.com.wy.dao.HeadDao.findByHeadId">
+    </association>
+    <collection property="propertyFeeList" column="rud_id"
+                 select="cn.com.wy.dao.PropertyFeeDao.findPfByRudId">
+    </collection>
+  </resultMap>
+
+</mapper>
