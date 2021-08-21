@@ -13,8 +13,8 @@
             <select id="search-yz_sex" class="easyui-combobox" panelHeight="auto" style="width:120px">
             	<option value=""></option>
             	<option value="0">未知</option>
-            	<option value="1">男</option>
-            	<option value="2">女</option>
+            	<option value="男">男</option>
+            	<option value="女">女</option>
             </select>
             <label>所属房屋:</label>
             <select  id="search-house_id" class="easyui-combobox" panelHeight="auto" style="width:120px">

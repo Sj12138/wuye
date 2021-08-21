@@ -49,14 +49,17 @@
     <!-- begin of sidebar -->
 	<div class="wu-sidebar" data-options="region:'west',split:true,border:true,title:'导航菜单'"> 
     	<div class="easyui-accordion" data-options="border:false,fit:true">
-        	<div title="业主管理" style="padding:5px;">
+        	<div title="用户管理" style="padding:5px;">
     			<ul class="easyui-tree wu-side-tree">
-                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../head/list?_mid=${secondMenu.id }" iframe="1">角色管理</a></li>
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../user/list1?_mid=${secondMenu.id }" iframe="1">管理人员管理</a></li>
+                </ul>
+                <ul class="easyui-tree wu-side-tree">
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../head/list1?_mid=${secondMenu.id }" iframe="1">业主管理</a></li>
                 </ul>
             </div>
-            <div title="楼房管理" style="padding:5px;">
+            <div title="公共设施管理" style="padding:5px;">
                 <ul class="easyui-tree wu-side-tree">
-                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../home/rudList?_mid=${secondMenu.id }" iframe="1">房屋管理</a></li>
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../facility/index?_mid=${secondMenu.id }" iframe="1">公共设施管理</a></li>
                 </ul>
             </div>
         </div>

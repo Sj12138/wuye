@@ -11,5 +11,33 @@
                  select="cn.com.wy.dao.CommunalDao.findComByComId">
     </association>
   </resultMap>
+  <select id="findAll" resultMap="CommServiceEntityMap">
+        select * from t_commService order by cs_id
+    </select>
 
+  <select id="findByCsId" resultMap="CommServiceEntityMap" parameterType="java.lang.Integer">
+        select * from t_commService where cs_id=#{csId}
+    </select>
+
+  <select id="findByComId" resultMap="CommServiceEntityMap" parameterType="java.lang.Integer">
+        select * from t_commService where cs_comid=#{comId}
+     </select>
+
+  <update id="updateCs"  parameterType="cn.com.wy.entity.CommServiceEntity">
+        update t_commService set
+        cs_date=#{csDate},
+        cs_count=#{csCount},
+        cs_issue=#{csIssue},
+        cs_remark=#{csRemark}
+        where cs_id=#{csId}
+    </update>
+
+  <insert id="addCs" parameterType="cn.com.wy.entity.CommServiceEntity">
+        insert into t_commService(cs_date,cs_comid,cs_count_,cs_cs.issue,cs_remark)
+        values(#{csDate},#{communal.comId},#{csCount},#{csIssue},#{csRemark})
+    </insert>
+
+  <delete id="deleteCs" parameterType="java.lang.Integer">
+        delete from t_commService where cs_id=#{CsId}
+    </delete>
 </mapper>

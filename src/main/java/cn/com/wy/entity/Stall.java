@@ -1,8 +1,11 @@
 package cn.com.wy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 车位实体类
  */
+@JsonIgnoreProperties(value={"head"})
 public class Stall {
     private int stallId;
     private String stallName;

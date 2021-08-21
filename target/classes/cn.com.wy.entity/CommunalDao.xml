@@ -8,8 +8,64 @@
     <result column="com_state" property="comState"/>
     <result column="com_remark" property="comRemark"/>
     <collection property="commServiceEntityList" column="com_id"
-                 select="cn.com.wy.dao.CommServiceDao.findByComId">
+                select="cn.com.wy.dao.CommServiceDao.findByComId">
     </collection>
   </resultMap>
+  <select id="findAll" resultMap="CommunalMap">
+    select * from t_communal order by com_id
+  </select>
 
+  <select id="findComByComId" resultMap="CommunalMap" parameterType="java.lang.Integer">
+    select * from t_communal where com_id=#{comid}
+  </select>
+
+  <select id="findComByComState" resultMap="CommunalMap" parameterType="java.lang.Integer">
+    select * from t_communal where com_state=#{comState}
+  </select>
+
+  <select id="findComByComName" resultMap="CommunalMap" parameterType="java.lang.String">
+    select * from t_communal where com_name=#{comName}
+  </select>
+
+  <update id="updateCom" parameterType="cn.com.wy.entity.Communal">
+    update t_communal
+    <set>
+      <if test="comName !=null">
+        com_name=#{comName},
+      </if>
+      <if test="comMoney !=null">
+        com_money=#{comMoney},
+      </if>
+      <if test="comState !=null">
+        com_state=#{comState},
+      </if>
+      <if test="comRemark !=null and comRemark != ''">
+        com_remark=#{comRemark},
+      </if>
+    </set>
+    where  com_id=#{comId}
+  </update>
+  <insert id="addCom" parameterType="cn.com.wy.entity.Communal">
+    insert into t_communal(com_name,com_money,com_state,com_remark)
+    values (#{comName},#{comMoney},#{comState},#{comRemark})
+  </insert>
+  <delete id="deleteCom" parameterType="java.lang.Integer">
+    delete from t_communal where com_id in
+    <foreach collection="comId" item="id" index="no" open="("
+             separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <select id="findCom" parameterType="cn.com.wy.entity.Communal" resultMap="CommunalMap">
+    select *from t_communal
+    <where>
+      <if test="comName != null and comName != ''">
+        and com_name like concat("%",#{comName},"%")
+      </if>
+      <if test="comState != 0">
+        and com_state=#{comState}
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -80,6 +80,19 @@
                 <td width="60" align="right">年龄:</td>
                 <td><input type="text" name="userAge" class="wu-text easyui-numberbox easyui-validatebox" data-options="required:true,min:1,precision:0, missingMessage:'请填写年龄'" /></td>
             </tr>
+            </tr>
+            <td width="60" align="right">职业:</td>
+            <td>
+                <select name="post.postId" class="easyui-combobox" panelHeight="auto" style="width:268px" data-options="required:true, missingMessage:'请选择角色'">
+                    <c:forEach items="${roleList }" var="role">
+                        <option value="${role.postId }">${role.postName }</option>
+                    </c:forEach>
+                </select>
+            </td>
+            <tr>
+                <td width="60" align="right">奖金:</td>
+                <td><input type="text" name="userHonus" class="wu-text easyui-numberbox easyui-validatebox" data-options="required:true,min:1,precision:0, missingMessage:'请填写年龄'" /></td>
+            </tr>
             <tr>
                 <td width="60" align="right">地址:</td>
                 <td><input type="text" name="userAddress" class="wu-text easyui-validatebox" /></td>
@@ -113,20 +126,20 @@
             </tr>
             <tr>
                 <td width="60" align="right">姓名:</td>
-                <td><input type="text" id="edituserName" name="userName" class="wu-text easyui-validatebox" data-options="required:true, missingMessage:'请填写用户名'" /></td>
+                <td><input type="text" id="edituserName" name="userName" class="wu-text easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td width="60" align="right">账号:</td>
-                <td><input type="text" id="edituserNum" name="userNum" class="wu-text easyui-validatebox" data-options="required:true, missingMessage:'请填写用户名'" /></td>
+                <td><input type="text" id="edituserNum" name="userNum" class="wu-text easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td width="60" align="right">密码:</td>
-                <td><input type="password" id="edituserPwd" name="userPwd" class="wu-text easyui-validatebox" data-options="required:true, missingMessage:'请填写密码'" /></td>
+                <td><input type="password" id="edituserPwd" name="userPwd" class="wu-text easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td width="60" align="right">所属角色:</td>
                 <td>
-                    <select name="userState" id="edituserState" class="easyui-combobox" panelHeight="auto" style="width:268px" data-options="required:true, missingMessage:'请选择角色'">
+                    <select name="userState" id="edituserState" class="easyui-combobox" panelHeight="auto" style="width:268px"/>
                         <option value="-1">请选择</option>
                         <option value="2">管理员</option>
                         <option value="3">物业</option>
@@ -145,7 +158,19 @@
             </tr>
             <tr>
                 <td width="60" align="right">年龄:</td>
-                <td><input type="text" id="edituserAge" name="userAge" class="wu-text easyui-numberbox easyui-validatebox" data-options="required:true,min:1,precision:0, missingMessage:'请填写年龄'" /></td>
+                <td><input type="text" id="edituserAge" name="userAge" class="wu-text easyui-numberbox easyui-validatebox"/></td>
+            </tr>
+            <td width="60" align="right">职业:</td>
+            <td>
+                <select id="edituserPost" name="post.postId" class="easyui-combobox" panelHeight="auto" style="width:268px">
+                    <c:forEach items="${roleList }" var="role">
+                        <option value="${role.postId }">${role.postName }</option>
+                    </c:forEach>
+                </select>
+            </td>
+            <tr>
+                <td width="60" align="right">奖金:</td>
+                <td><input type="text" id="edituserHonus" name="userHonus" class="wu-text easyui-numberbox easyui-validatebox"/></td>
             </tr>
             <tr>
                 <td width="60" align="right">地址:</td>
@@ -373,6 +398,9 @@
             	$("#edituserAddress").val(item.userAddress);
                 $("#edituserCard").val(item.userCard);
                 $("#edituserPhone").val(item.userPhone);
+                $("#edituserHonus").val(item.userHonus);
+                $("#edituserPost").combobox('setValue',item.post.postName);
+                $("#edituserHonus").val(item.postHonus);
             }
         });
 	}	
@@ -409,10 +437,10 @@
 		columns:[[
 			{ field:'chk',checkbox:true},
             { field:'userId',title:'id',width:100,sortable:true,hidden:"true"},
-			{ field:'userName',title:'用户名',width:100,sortable:true},
-            { field:'userNum',title:'账号',width:100,sortable:true},
-			{ field:'userPwd',title:'密码',width:100},
-			{ field:'userState',title:'所属角色',width:100,formatter:function(value,row,index){
+			{ field:'userName',title:'用户名',width:70,sortable:true},
+            { field:'userNum',title:'账号',width:70,sortable:true},
+			{ field:'userPwd',title:'密码',width:70},
+			{ field:'userState',title:'权限',width:70,formatter:function(value,row,index){
                     switch(value){
                         case 1:{
                             return '超级管理员';
@@ -429,8 +457,19 @@
                     }
                     return value;
                 }},
-			{ field:'userSex',title:'性别',width:100},
-			{ field:'userAge',title:'年龄',width:100},
+            { field:'post.postName',title:'职位',width:70,
+                formatter: function(value,row,index){
+                    return row['post']['postName'];
+                }
+            },
+            { field:'post.postSal',title:'薪资',width:70,
+                formatter: function(value,row,index){
+                    return row['post']['postSal'];
+                }
+            },
+            { field:'userHonus',title:'奖金',width:70},
+			{ field:'userSex',title:'性别',width:70},
+			{ field:'userAge',title:'年龄',width:70},
 			{ field:'userAddress',title:'地址',width:200},
 		]],
 		onLoadSuccess:function(data){  

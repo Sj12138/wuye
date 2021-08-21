@@ -1,10 +1,13 @@
 package cn.com.wy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 /**
  * 职位实体类
  */
+@JsonIgnoreProperties(value={"userList"})
 public class Post {
     private int postId;
     private String postName;

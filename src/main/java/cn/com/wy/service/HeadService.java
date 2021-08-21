@@ -25,14 +25,14 @@ public interface HeadService {
      * @param head
      * @return
      */
-    int addHead(Head head);
+    boolean addHead(Head head);
 
     /**
      * 传入Head对象修改数据库原有对象
      * @param head
      * @return
      */
-    int updateHead(Head head);
+    boolean updateHead(Head head);
 
     /**
      * 模糊查询,如果为null或者0则不加入此列
@@ -43,10 +43,10 @@ public interface HeadService {
 
     /**
      * 根据headId删除head表中对应字段
-     * @param headId
+     * @param ids
      * @return
      */
-    int deleteHead(int headId);
+    boolean deleteHead(List<Integer> ids);
 
     /**
      * 根据传入的headName查询出对象

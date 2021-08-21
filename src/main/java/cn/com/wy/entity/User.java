@@ -1,5 +1,7 @@
 package cn.com.wy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 物业人员实体类
  * userState:由数据库查询出来的为数字，移交给前端判断处理(1:超级管理员 2:管理员 3:物业)

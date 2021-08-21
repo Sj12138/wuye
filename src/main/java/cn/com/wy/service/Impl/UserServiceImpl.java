@@ -2,12 +2,18 @@ package cn.com.wy.service.Impl;
 
 import cn.com.wy.dao.UserDao;
 import cn.com.wy.entity.User;
+import cn.com.wy.service.PostService;
 import cn.com.wy.service.UserService;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
+    private PostService postService;
+
+    public void setPostService(PostService postService) {
+        this.postService = postService;
+    }
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
@@ -54,6 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(User user) {
+//        user.getPost().setPostId(postService.findByPostName(user.getPost().getPostName()).getPostId());
         boolean bool = false;
         int i = userDao.updateUser(user);
         if(i != 0){

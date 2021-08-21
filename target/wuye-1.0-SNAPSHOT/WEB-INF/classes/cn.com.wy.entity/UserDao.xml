@@ -14,9 +14,10 @@
         <result column="mana_card" property="userCard"/>
         <result column="mana_address" property="userAddress"/>
         <result column="mana_sex" property="userSex"/>
-        <!--   <association property="post" column="mana_postid"
+        <result column="mana_honus" property="userHonus"/>
+        <association property="post" column="mana_postid"
                         select="cn.com.wy.dao.PostDao.findByPostId">
-           </association>-->
+        </association>
     </resultMap>
     <select id="findAllUser" resultMap="UserMap">
         select *

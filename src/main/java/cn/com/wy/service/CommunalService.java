@@ -49,4 +49,13 @@ public interface CommunalService {
      * @return
      */
     boolean addCom(Communal communal);
+
+    /**
+     * 删除公共设施
+     * @param comId
+     * @return
+     */
+    boolean deleteCom(List<Integer> comId);
+
+    List<Communal> findCom(Communal communal);
 }

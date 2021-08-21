@@ -1,38 +1,60 @@
 package cn.com.wy.service.Impl;
 
+import cn.com.wy.dao.PostDao;
 import cn.com.wy.entity.Post;
 import cn.com.wy.service.PostService;
 
 import java.util.List;
 
 public class PostServiceImpl implements PostService {
+    private PostDao postDao;
+
+    public void setPostDao(PostDao postDao) {
+        this.postDao = postDao;
+    }
+
     @Override
     public List<Post> findAll() {
-        return null;
+        return postDao.findAll();
     }
 
     @Override
     public Post findByPostId(int postId) {
-        return null;
+        return postDao.findByPostId(postId);
     }
 
     @Override
-    public List<Post> findByPostName(String PostName) {
-        return null;
+    public Post findByPostName(String PostName) {
+        return postDao.findByPostName(PostName);
     }
 
     @Override
     public boolean updatePost(Post post) {
-        return false;
+        boolean bool = false;
+        int count = postDao.updatePost(post);
+        if(count != 0){
+            bool = true;
+        }
+        return bool;
     }
 
     @Override
     public boolean addPost(Post post) {
-        return false;
+        boolean bool = false;
+        int count = postDao.addPost(post);
+        if(count != 0){
+            bool = true;
+        }
+        return bool;
     }
 
     @Override
     public boolean delete(int postId) {
-        return false;
+        boolean bool = false;
+        int count = postDao.delete(postId);
+        if(count != 0){
+            bool = true;
+        }
+        return bool;
     }
 }

@@ -1,10 +1,13 @@
 package cn.com.wy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Date;
 
 /**
  * 报修记录实体类
  */
+@JsonIgnoreProperties(value={"head"})
 public class Repairs {
     private int repId;
     private Date repEndDate; //结束时间

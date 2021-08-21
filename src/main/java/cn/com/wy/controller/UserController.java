@@ -1,19 +1,22 @@
 package cn.com.wy.controller;
 
 import cn.com.wy.entity.User;
+import cn.com.wy.service.PostService;
 import cn.com.wy.service.UserService;
 import com.alibaba.druid.util.StringUtils;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
 /**
  * 前台控制器
@@ -26,11 +29,20 @@ import java.util.Map;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PostService postService;
 	/**
 	 * 系统的首页
-	 * @param model
+	 * @param
 	 * @return
 	 */
+	@RequestMapping("/list1")
+	public ModelAndView list(ModelAndView model){
+		Map<String, Object> queryMap = new HashMap<String, Object>();
+		model.addObject("roleList", postService.findAll());
+		model.setViewName("user/list");
+		return model;
+	}
 	@RequestMapping(value="/index",method= RequestMethod.GET)
 	public ModelAndView index(ModelAndView model){
 		model.setViewName("system/login");
@@ -45,16 +57,34 @@ public class UserController {
 	 * @return			验证成功重定向到home/list 失败则返回原页面system/login
 	 */
 	@PostMapping("login")
-	public String login(User user, String cpacha, Model model){
-		User bool = userService.login(user);
-		if(bool != null){
-			model.addAttribute("userName",bool.getUserName());
-			model.addAttribute("userId",bool.getUserId());
-			model.addAttribute("roleId",bool.getUserState());
-			return "redirect:../home/list";
-		}else{
-			return "system/login";
+	public String login(User user, String cpacha, Model model, HttpServletRequest req){
+		//        获取验证码
+		String token = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+		//        删除验证码
+		req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
+		StringBuffer msg = new StringBuffer();
+		System.out.println("token:"+token);
+		System.out.println("cap:"+cpacha);
+		if(token.equalsIgnoreCase(cpacha)){
+			User bool = userService.login(user);
+			if(bool != null){
+				model.addAttribute("userName",bool.getUserName());
+				model.addAttribute("userId",bool.getUserId());
+				model.addAttribute("roleId",bool.getUserState());
+				return "redirect:../home/list";
+			}else{
+				msg.append("<script>\n" +
+						"        alert(\"账号或密码错误\");\n" +
+						"    </script>");
+				req.setAttribute("msg",msg);
+				return "system/login";
+			}
 		}
+		msg.append("<script>\n" +
+				"        alert(\"验证码错误\");\n" +
+				"    </script>");
+		req.setAttribute("msg",msg);
+		return "system/login";
 	}
 	@RequestMapping(value="/list",method=RequestMethod.POST)
 	@ResponseBody
@@ -117,7 +147,6 @@ public class UserController {
 	@RequestMapping(value="/edit",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> edit(User user){
-		System.out.println(user);
 		Map<String, String> ret = new HashMap<String, String>();
 		if(user == null){
 			ret.put("type", "error");
@@ -136,11 +165,11 @@ public class UserController {
 		}
 		if(!userService.updateUser(user)){
 			ret.put("type", "error");
-			ret.put("msg", "用户添加失败！");
+			ret.put("msg", "用户修改失败！");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "角色添加成功！");
+		ret.put("msg", "角色修改成功！");
 		return ret;
 	}
 

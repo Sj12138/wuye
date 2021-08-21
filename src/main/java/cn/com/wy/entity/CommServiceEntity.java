@@ -1,10 +1,13 @@
 package cn.com.wy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Date;
 
 /**
  * 公共设施维修记录实体类
  */
+@JsonIgnoreProperties(value={"communal"})
 public class CommServiceEntity {
     private int csId;
     private Date csDate;

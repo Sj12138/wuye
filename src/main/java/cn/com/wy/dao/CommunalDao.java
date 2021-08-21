@@ -1,6 +1,7 @@
 package cn.com.wy.dao;
 
 import cn.com.wy.entity.Communal;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -48,4 +49,14 @@ public interface CommunalDao {
      * @return
      */
     int addCom(Communal communal);
+
+    /**
+     * 删除公共设施
+     *
+     * @param comId
+     * @return
+     */
+    int deleteCom(@Param("comId") List<Integer> comId);
+
+    List<Communal> findCom(Communal communal);
 }

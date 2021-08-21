@@ -1,10 +1,13 @@
 package cn.com.wy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Date;
 
 /**
  * 物业费用实体类
  */
+@JsonIgnoreProperties(value={"rud"})
 public class PropertyFee {
     private int pfId;
     private double pfMoney;

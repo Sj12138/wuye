@@ -26,7 +26,7 @@ public interface PostDao {
      * @param PostName
      * @return
      */
-    List<Post> findByPostName(String PostName);
+    Post findByPostName(String PostName);
 
     /**
      * 修改职位

@@ -1,10 +1,13 @@
 package cn.com.wy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 /**
  * 房间实体类
  */
+@JsonIgnoreProperties(value={"head","propertyFeeList"})
 public class Rud {
     private int rudId;
     private int rudRidId;  //栋

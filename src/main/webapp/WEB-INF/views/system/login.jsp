@@ -13,6 +13,9 @@
   <link rel="stylesheet" type="text/css" href="../../../resources/admin/login/css/reset.css">
 </head>
 <body>
+<div>
+	${msg}
+</div>
 <div id="particles-js">
 		<form id="loginForm" action="/user/login" method="post">
 			<div class="login" style="display: block;">

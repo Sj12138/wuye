@@ -1,6 +1,8 @@
 package cn.com.wy.dao;
 
 import cn.com.wy.entity.Head;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -42,15 +44,15 @@ public interface HeadDao {
 
     /**
      * 根据headId删除head表中对应字段
-     * @param headId
+     * @param ids
      * @return
      */
-    int deleteHead(int headId);
+    int deleteHead(@Param("ids") List<Integer> ids);
 
     /**
      * 根据传入的headName查询出对象
      * @param headName
      * @return
      */
-    List<Head> findByHeadName(String headName);
+    List<Head> findByHeadName(@Param("headName") String headName);
 }
