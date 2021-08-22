@@ -1,13 +1,21 @@
 package cn.com.wy.service.Impl;
 
 import cn.com.wy.dao.CommServiceDao;
+import cn.com.wy.dao.CommunalDao;
 import cn.com.wy.entity.CommServiceEntity;
 import cn.com.wy.service.CommServiceService;
 
+import java.sql.Date;
 import java.util.List;
 
 public class CommServiceServiceImpl implements CommServiceService {
     private CommServiceDao commServiceDao;
+    private CommunalDao communalDao;
+
+    public void setCommunalDao(CommunalDao communalDao) {
+        this.communalDao = communalDao;
+    }
+
     public void setCommServiceDao(CommServiceDao commServiceDao) {
         this.commServiceDao = commServiceDao;
     }
@@ -32,9 +40,13 @@ public class CommServiceServiceImpl implements CommServiceService {
     @Override
     public boolean updateCs(CommServiceEntity commServiceEntity) {
         boolean updatecs=false;
-        int i=this.commServiceDao.updateCs(commServiceEntity);
-        if (i!=0){
-            updatecs=true;
+        try {
+            int i=this.commServiceDao.updateCs(commServiceEntity);
+            if (i!=0){
+                updatecs=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return updatecs;
     }
@@ -42,9 +54,16 @@ public class CommServiceServiceImpl implements CommServiceService {
     @Override
     public boolean addCs(CommServiceEntity commServiceEntity) {
         boolean addcs=false;
-        int i=this.commServiceDao.addCs(commServiceEntity);
-        if (i!=0){
-            addcs=true;
+        Date d = new Date(System.currentTimeMillis());
+        commServiceEntity.setCsDate(d);
+        try {
+            commServiceEntity.getCommunal().setComId(communalDao.findComByComName(commServiceEntity.getCommunal().getComName()).getComId());
+            int i=this.commServiceDao.addCs(commServiceEntity);
+            if (i!=0){
+                addcs=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return addcs;
     }

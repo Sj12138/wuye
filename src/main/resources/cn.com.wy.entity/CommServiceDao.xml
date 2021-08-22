@@ -33,7 +33,7 @@
     </update>
 
   <insert id="addCs" parameterType="cn.com.wy.entity.CommServiceEntity">
-        insert into t_commService(cs_date,cs_comid,cs_count_,cs_cs.issue,cs_remark)
+        insert into t_commService(cs_date,cs_comid,cs_count,cs_issue,cs_remark)
         values(#{csDate},#{communal.comId},#{csCount},#{csIssue},#{csRemark})
     </insert>
 

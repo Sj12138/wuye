@@ -9,12 +9,12 @@
     <result column="rud_ridgepole" property="rudRidgepole"/>
     <result column="rud_unit" property="rudUnit"/>
     <result column="rud_doorplate" property="rudDoorplate"/>
-    <!--    <association property="head" column="rud_headid"-->
-    <!--                select="cn.com.wy.dao.HeadDao.findByHeadId">-->
-    <!--    </association>-->
-    <!--    <collection property="propertyFeeList" column="rud_id"-->
-    <!--                 select="cn.com.wy.dao.PropertyFeeDao.findPfByRudId">-->
-    <!--    </collection>-->
+<!--        <association property="head" column="rud_headid"-->
+<!--                    select="cn.com.wy.dao.HeadDao.findByHeadId">-->
+<!--        </association>-->
+<!--        <collection property="propertyFeeList" column="rud_id"-->
+<!--                     select="cn.com.wy.dao.PropertyFeeDao.findPfByRudId">-->
+<!--        </collection>-->
   </resultMap>
   <select id="findAllRud" resultMap="RudMap">
 SELECT  rud.rud_id AS rud_id,rud.rud_ridid AS rud_ridid,
@@ -45,29 +45,33 @@ LEFT JOIN t_doorplate dp ON rud.rud_dpid = dp.dp_id
   <update id="updateRud" parameterType="cn.com.wy.entity.Rud">
     update t_rud
     <set>
-      <if test="rudRidId !=null">
-        rud_ridid=#{rudRidId},
+      <if test="rudRidgepole !=null">
+        rud_ridid=(select rid_id from t_ridgepole where rid_name = #{rudRidgepole}),
       </if>
-      <if test="rudUnId !=null">
-        rud_unid=#{rudUnId},
+      <if test="rudUnit !=null">
+        rud_unid=(select  un_id from t_unit where un_name=#{rudUnit}),
       </if>
-      <if test="rudDpId !=null">
-        rud_dpid=#{rudDpId},
+      <if test="rudDoorplate !=null">
+        rud_dpid=(select dp_id from t_doorplate where  dp_name=#{rudDoorplate}),
       </if>
-      <if test="head.headId!=null">
-        rud_headid=#{head.headId},
-      </if>
+
     </set>
     where rud_id=#{rudId}
   </update>
   <insert id="addRud" parameterType="cn.com.wy.entity.Rud">
-insert into t_rud (rud_ridid,rud_unid,rud_dpid,rud_headid)
-values (#{rudRidId},#{rudUnId},#{rudDpId},#{head.headId})
-
+INSERT INTO t_rud(rud_ridid,rud_unid,rud_dpid) SELECT rid.rid_id AS rud_ridid,un.un_id AS rud_unid,un.un_id AS rud_unid
+ FROM t_ridgepole rid,t_unit un,t_doorplate dp WHERE rid.rid_name=#{rudRidgepole} AND un.un_name=#{rudUnit}
+  AND dp.dp_name=#{rudDoorplate}
   </insert>
-  <delete id="deleteRud">
-    delete from t_rud where rud_id=#{rudId}
+
+  <delete id="deleteRud" parameterType="java.lang.Integer">
+    delete from t_rud where rud_id in
+    <foreach collection="ids" item="id" index="no" open="("
+             separator="," close=")">
+      #{id}
+    </foreach>
   </delete>
+
   <select id="findRud" resultMap="RudMap" parameterType="cn.com.wy.entity.Rud">
     SELECT  rud.rud_id AS rud_id,rud.rud_ridid AS rud_ridid,
     rud.rud_unid AS rud_unid,rud.rud_headid AS run_headid,rid.rid_Name AS rud_ridgepole,un.un_Name AS rud_unit,dp.dp_Name AS rud_doorplate
@@ -77,15 +81,26 @@ values (#{rudRidId},#{rudUnId},#{rudDpId},#{head.headId})
     LEFT JOIN t_doorplate dp ON rud.rud_dpid = dp.dp_id
     <where>
       <if test="rudRidgepole != null">
-        and rid.rid_name = #{rudRidgepole}
+        and rid.rid_name like concat("%",#{rudRidgepole},"%")
       </if>
       <if test="rudUnit != null">
-        and un.un_name = #{rudUnit}
+        and un.un_name  like concat("%",#{rudUnit},"%")
       </if>
       <if test="rudDoorplate != null">
-        and dp.dp_name = #{rudDoorplate}
+        and dp.dp_name  like concat("%",#{rudDoorplate},"%")
       </if>
     </where>
   </select>
+  <select id="findRid" resultMap="RudMap">
+    select rid_name as rud_ridgepole from t_ridgepole group by rud_ridgepole
+  </select>
+  <select id="findUn" resultMap="RudMap">
+    select un_name as rud_unit from t_unit group by rud_unit
+  </select>
+  <select id="findDp" resultMap="RudMap">
+    select dp_name as rud_doorplate from t_doorplate group by rud_doorplate
+  </select>
 </mapper>
+
+
     

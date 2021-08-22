@@ -41,11 +41,4 @@ public interface PayRecordsDao {
      * @return
      */
     int addPrc(PayRecords payRecords);
-
-    /**
-     * 根据prcId删除缴费记录
-     * @param prcId
-     * @return
-     */
-    int deletePrc(int prcId);
 }

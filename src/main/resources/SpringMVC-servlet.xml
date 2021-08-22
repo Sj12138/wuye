@@ -23,9 +23,29 @@
 <!--    <mvc:resources location="/small/" mapping="/small/**/*" cache-period="360000"/> -->
 <!--    <mvc:resources location="/assets/" mapping="/assets/**/*" cache-period="360000"/>  -->
 <!--    <mvc:resources location="/images/" mapping="/images/*" cache-period="360000"/>-->
-    
-    
-    <!-- 配置拦截器 -->
+
+
+    <!-- 后台访问拦截器 -->
+    <!--  -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/commservice/*"/>
+            <mvc:mapping path="/facility/*"/>
+            <mvc:mapping path="/head/*"/>
+            <mvc:mapping path="/user/*"/>
+            <mvc:mapping path="/home/*"/>
+            <mvc:mapping path="/payrecords/*"/>
+            <mvc:mapping path="/propertyFee/*"/>
+            <mvc:mapping path="/repairs/*"/>
+            <mvc:mapping path="/rud/*"/>
+            <mvc:mapping path="/stall/*"/>
+            <mvc:exclude-mapping path="/user/index"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/system/login"/>
+            <mvc:exclude-mapping path="/home/login"/>
+            <bean class="cn.com.wy.controller.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
     
     
     

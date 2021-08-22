@@ -53,4 +53,11 @@ public interface PropertyFeeService {
      */
     boolean addPf(PropertyFee propertyFee);
 
+    /**
+     * 模糊查询
+     * @param propertyFee
+     * @return
+     */
+    List<PropertyFee> findPf(PropertyFee propertyFee);
+
 }

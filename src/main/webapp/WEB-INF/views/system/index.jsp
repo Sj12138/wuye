@@ -60,6 +60,7 @@
             <div title="公共设施管理" style="padding:5px;">
                 <ul class="easyui-tree wu-side-tree">
                     <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../facility/index?_mid=${secondMenu.id }" iframe="1">公共设施管理</a></li>
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../commservice/list1?_mid=${secondMenu.id }" iframe="1">记录管理</a></li>
                 </ul>
             </div>
             <div title="车位管理" style="padding:5px;">
@@ -70,6 +71,18 @@
             <div title="报修管理" style="padding:5px;">
                 <ul class="easyui-tree wu-side-tree">
                     <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../repairs/list1?_mid=${secondMenu.id }" iframe="1">报修管理</a></li>
+                </ul>
+            </div>
+            <div title="物业费用管理" style="padding:5px;">
+                <ul class="easyui-tree wu-side-tree">
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../propertyFee/list1?_mid=${secondMenu.id }" iframe="1">物业费管理</a></li>
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../payrecords/list1?_mid=${secondMenu.id }" iframe="1">缴费记录</a></li>
+                </ul>
+            </div>
+            <div title="房屋管理" style="padding:5px;">
+                <ul class="easyui-tree wu-side-tree">
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../rud/list1?_mid=${secondMenu.id }" iframe="1">房屋管理</a></li>
+
                 </ul>
             </div>
         </div>

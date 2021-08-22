@@ -102,7 +102,6 @@ public class Rud {
                 ", rudUnit='" + rudUnit + '\'' +
                 ", rudDoorplate='" + rudDoorplate + '\'' +
                 ", head=" + head +
-                ", propertyFeeList=" + propertyFeeList +
                 '}';
     }
 }

@@ -31,9 +31,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public boolean updatePost(Post post) {
         boolean bool = false;
-        int count = postDao.updatePost(post);
-        if(count != 0){
-            bool = true;
+        try {
+            int count = postDao.updatePost(post);
+            if(count != 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
@@ -41,9 +45,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public boolean addPost(Post post) {
         boolean bool = false;
-        int count = postDao.addPost(post);
-        if(count != 0){
-            bool = true;
+        try {
+            int count = postDao.addPost(post);
+            if(count != 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
@@ -51,9 +59,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public boolean delete(int postId) {
         boolean bool = false;
-        int count = postDao.delete(postId);
-        if(count != 0){
-            bool = true;
+        try {
+            int count = postDao.delete(postId);
+            if(count != 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }

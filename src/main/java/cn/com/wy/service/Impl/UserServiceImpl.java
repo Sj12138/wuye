@@ -60,11 +60,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(User user) {
-//        user.getPost().setPostId(postService.findByPostName(user.getPost().getPostName()).getPostId());
         boolean bool = false;
-        int i = userDao.updateUser(user);
-        if(i != 0){
-            bool = true;
+        try {
+            int i = userDao.updateUser(user);
+            if(i != 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
@@ -72,9 +75,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUser(List<Integer> ids) {
         boolean bool = false;
-        int i= userDao.deleteUser(ids);
-        if(i != 0){
-            bool = true;
+        try {
+            int i= userDao.deleteUser(ids);
+            if(i != 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
@@ -92,9 +99,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean addUser(User user) {
         boolean bool = false;
-        int i = userDao.addUser(user);
-        if (i > 0 ) {
-            bool =true;
+        try {
+            int i = userDao.addUser(user);
+            if (i > 0 ) {
+                bool =true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }

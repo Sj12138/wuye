@@ -1,14 +1,21 @@
 package cn.com.wy.service.Impl;
 
+import cn.com.wy.dao.PayRecordsDao;
 import cn.com.wy.entity.PayRecords;
 import cn.com.wy.service.PayRecordsService;
 
 import java.util.List;
 
 public class PayRecordsServiceImpl implements PayRecordsService {
+    private PayRecordsDao payRecordsDao;
+
+    public void setPayRecordsDao(PayRecordsDao payRecordsDao) {
+        this.payRecordsDao = payRecordsDao;
+    }
+
     @Override
     public List<PayRecords> findAll() {
-        return null;
+        return payRecordsDao.findAll();
     }
 
     @Override

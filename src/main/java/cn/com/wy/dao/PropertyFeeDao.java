@@ -56,4 +56,11 @@ public interface PropertyFeeDao {
      */
     int addPf(PropertyFee propertyFee);
 
+    /**
+     * 模糊查询
+     * @param propertyFee
+     * @return
+     */
+    List<PropertyFee> findPf(PropertyFee propertyFee);
+
 }

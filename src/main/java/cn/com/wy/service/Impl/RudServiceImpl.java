@@ -31,9 +31,13 @@ public class RudServiceImpl implements RudService {
     @Override
     public boolean updateRud(Rud rud) {
         boolean i=false;
-        int count = this.rudDao.updateRud(rud);
-        if (count>0){
-            i=true;
+        try {
+            int count = this.rudDao.updateRud(rud);
+            if (count>0){
+                i=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return i;
     }
@@ -41,19 +45,27 @@ public class RudServiceImpl implements RudService {
     @Override
     public boolean addRud(Rud rud) {
         boolean bool=false;
-        int count=this.rudDao.addRud(rud);
-        if (count>0){
-            bool=true;
+        try {
+            int count=this.rudDao.addRud(rud);
+            if (count>0){
+                bool=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
 
     @Override
-    public boolean deleteRud(int rudId) {
+    public boolean deleteRud(List<Integer> rudId) {
         boolean bool=false;
-        int count=this.rudDao.deleteRud(rudId);
-        if (count>0){
-            bool=true;
+        try {
+            int count=this.rudDao.deleteRud(rudId);
+            if (count>0){
+                bool=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
@@ -62,6 +74,22 @@ public class RudServiceImpl implements RudService {
     public List<Rud> findRud(Rud rud) {
         return rudDao.findRud(rud);
     }
+
+    @Override
+    public List<Rud> findRid() {
+        return rudDao.findRid();
+    }
+
+    @Override
+    public List<Rud> findUn() {
+        return rudDao.findUn();
+    }
+
+    @Override
+    public List<Rud> findDp() {
+        return rudDao.findDp();
+    }
+
     public void setRudDao(RudDao rudDao){
 
         this.rudDao=rudDao;

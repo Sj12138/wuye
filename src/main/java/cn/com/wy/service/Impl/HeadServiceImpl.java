@@ -26,9 +26,13 @@ public class HeadServiceImpl implements HeadService {
     @Override
     public boolean addHead(Head head) {
         boolean bool = false;
-        int count = headDao.addHead(head);
-        if(count != 0){
-            bool = true;
+        try{
+            int count = headDao.addHead(head);
+            if(count != 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
@@ -36,9 +40,13 @@ public class HeadServiceImpl implements HeadService {
     @Override
     public boolean updateHead(Head head) {
         boolean bool = false;
-        int count = headDao.updateHead(head);
-        if(count != 0){
-            bool = true;
+        try{
+            int count = headDao.updateHead(head);
+            if(count != 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }

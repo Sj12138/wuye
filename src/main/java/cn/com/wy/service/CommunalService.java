@@ -34,7 +34,7 @@ public interface CommunalService {
      * @param comName
      * @return
      */
-    List<Communal> findComByComName(String comName);
+    Communal findComByComName(String comName);
 
     /**
      * 修改设施信息

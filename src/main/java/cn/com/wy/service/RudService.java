@@ -47,7 +47,7 @@ public interface RudService {
      * @param rudId
      * @return
      */
-    boolean deleteRud(int rudId);
+    boolean deleteRud(List<Integer> rudId);
 
     /**
      * 条件查询(若传入的只有栋号，则只根据栋号查询对应的房屋)
@@ -55,4 +55,10 @@ public interface RudService {
      * @return
      */
     List<Rud> findRud(Rud rud);
+    List<Rud> findRid();
+    List<Rud> findUn();
+    List<Rud> findDp();
+
 }
+
+

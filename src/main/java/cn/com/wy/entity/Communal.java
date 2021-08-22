@@ -63,4 +63,15 @@ public class Communal {
     public void setCommServiceEntityList(List<CommServiceEntity> commServiceEntityList) {
         this.commServiceEntityList = commServiceEntityList;
     }
+
+    @Override
+    public String toString() {
+        return "Communal{" +
+                "comId=" + comId +
+                ", comName='" + comName + '\'' +
+                ", comMoney=" + comMoney +
+                ", comState=" + comState +
+                ", comRemark='" + comRemark + '\'' +
+                '}';
+    }
 }

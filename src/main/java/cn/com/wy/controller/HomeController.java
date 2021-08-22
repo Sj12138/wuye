@@ -23,4 +23,8 @@ public class HomeController {
     public String rudList(){
         return "rud/list";
     }
+    @RequestMapping("login")
+    public String login(){
+        return "system/login";
+    }
 }

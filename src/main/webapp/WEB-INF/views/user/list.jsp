@@ -409,7 +409,7 @@
 	//搜索按钮监听
 	$("#search-btn").click(function(){
 		var userState = $("#search-role").combobox('getValue');
-		var userSex = $("#search-sex").combobox('getValue')
+		var userSex = $("#search-sex").combobox('getValue');
 		var option = {userName:$("#search-name").val()};
 		if(userState != -1){
 			option.userState = userState;

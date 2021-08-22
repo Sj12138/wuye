@@ -66,7 +66,6 @@ public class Stall {
         return "Stall{" +
                 "stallId=" + stallId +
                 ", stallName='" + stallName + '\'' +
-                ", head=" + head +
                 ", stallCarNo='" + stallCarNo + '\'' +
                 ", stallState=" + stallState +
                 ", stallRemark='" + stallRemark + '\'' +

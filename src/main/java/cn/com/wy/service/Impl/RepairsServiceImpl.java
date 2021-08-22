@@ -6,6 +6,7 @@ import cn.com.wy.entity.Head;
 import cn.com.wy.entity.Repairs;
 import cn.com.wy.service.RepairsService;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,11 +57,16 @@ public class RepairsServiceImpl implements RepairsService {
     public boolean updateRep(Repairs repairs) {
         boolean boo = false;
         Head head = headDao.findByHeadName(repairs.getHead().getHeadName());
+        Date d = new Date(System.currentTimeMillis());
+        repairs.setRepEndDate(d);
         repairs.setHead(head);
-        System.out.println(repairs);
-        int i = this.repairsDao.updateRep(repairs);
-        if (i != 0) {
-            boo = true;
+        try {
+            int i = this.repairsDao.updateRep(repairs);
+            if (i != 0) {
+                boo = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return boo;
     }
@@ -70,12 +76,15 @@ public class RepairsServiceImpl implements RepairsService {
         boolean boo = false;
         Head head = headDao.findByHeadName(repairs.getHead().getHeadName());
         repairs.setHead(head);
-
-        System.out.println(repairs);
-        int i = this.repairsDao.addRep(repairs);
-        System.out.println(i);
-        if (i != 0) {
-            boo = true;
+        Date d = new Date(System.currentTimeMillis());
+        repairs.setRepStartDate(d);
+        try {
+            int i = this.repairsDao.addRep(repairs);
+            if (i != 0) {
+                boo = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return boo;
     }
@@ -83,10 +92,13 @@ public class RepairsServiceImpl implements RepairsService {
     @Override
     public boolean deleteRep(List<Integer> repId) {
         boolean boo = false;
-        System.out.println(repId);
-        int i = this.repairsDao.deleteRep(repId);
-        if (i != 0) {
-            boo = true;
+        try {
+            int i = this.repairsDao.deleteRep(repId);
+            if (i != 0) {
+                boo = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return boo;
     }

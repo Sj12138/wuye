@@ -63,8 +63,6 @@ public class UserController {
 		//        删除验证码
 		req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
 		StringBuffer msg = new StringBuffer();
-		System.out.println("token:"+token);
-		System.out.println("cap:"+cpacha);
 		if(token.equalsIgnoreCase(cpacha)){
 			User bool = userService.login(user);
 			if(bool != null){

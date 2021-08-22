@@ -39,6 +39,9 @@
       <if test="repState != null">
         rep_state = #{repState},
       </if>
+      <if test="repState == 4">
+        rep_enddate = #{repEndDate},
+      </if>
       <if test="repRemark != null">
         rep_remark = #{repRemark},
       </if>
@@ -50,8 +53,8 @@
   </update>
 
   <insert id="addRep" parameterType="Repairs">
-        insert into t_repairs(rep_issue, rep_state, rep_remark, rep_headid)
-        values (#{repIssue}, #{repState}, #{repRemark}, #{head.headId})
+        insert into t_repairs(rep_issue, rep_startdate, rep_state, rep_remark, rep_headid)
+        values (#{repIssue},#{repStartDate}, #{repState}, #{repRemark}, #{head.headId})
     </insert>
 
   <delete id="deleteRep" parameterType="java.lang.String">

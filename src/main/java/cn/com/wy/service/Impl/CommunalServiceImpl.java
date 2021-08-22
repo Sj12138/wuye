@@ -30,18 +30,21 @@ public class CommunalServiceImpl implements CommunalService {
     }
 
     @Override
-    public List<Communal> findComByComName(String comName) {
-        List<Communal> findComByComNames=this.communalDao.findComByComName(comName);
+    public Communal findComByComName(String comName) {
+        Communal findComByComNames=this.communalDao.findComByComName(comName);
         return findComByComNames;
     }
 
     @Override
     public boolean updateCom(Communal communal) {
         boolean updateComs=false;
-        System.out.println(communal);
-        int i=this.communalDao.updateCom(communal);
-        if (i!=0){
-            updateComs=true;
+        try {
+            int i=this.communalDao.updateCom(communal);
+            if (i!=0){
+                updateComs=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return updateComs;
     }
@@ -49,9 +52,13 @@ public class CommunalServiceImpl implements CommunalService {
     @Override
     public boolean addCom(Communal communal) {
         boolean addComs=false;
-        int i=this.communalDao.addCom(communal);
-        if (i!=0){
-            addComs=true;
+        try {
+            int i=this.communalDao.addCom(communal);
+            if (i!=0){
+                addComs=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return addComs;
     }
@@ -64,7 +71,7 @@ public class CommunalServiceImpl implements CommunalService {
                 deleteComs=true;
             }
         }catch (Exception e){
-            System.out.println("删除失败");
+            e.printStackTrace();
         }
         return deleteComs;
     }

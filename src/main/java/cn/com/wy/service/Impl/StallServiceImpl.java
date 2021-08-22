@@ -57,9 +57,13 @@ public class StallServiceImpl implements StallService {
     public boolean updateStall(Stall stall) {
         boolean bool  =false;
         stall.getHead().setHeadId(headDao.findByHeadName(stall.getHead().getHeadName()).getHeadId());
-        int i = this.stallDao.updateStall(stall);
-        if(i != 0) {
-            bool = true;
+        try {
+            int i = this.stallDao.updateStall(stall);
+            if(i != 0) {
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
@@ -69,9 +73,13 @@ public class StallServiceImpl implements StallService {
         boolean bool = false;
         Head head = headDao.findByHeadName(stall.getHead().getHeadName());
         stall.setHead(head);
-        int i = stallDao.addStall(stall);
-        if( i >= 0){
-            bool = true;
+        try {
+            int i = stallDao.addStall(stall);
+            if( i >= 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return bool;
     }
@@ -79,11 +87,13 @@ public class StallServiceImpl implements StallService {
     @Override
     public boolean deleteStall( List<Integer> stallId) {
         boolean bool  = false;
-        int i =stallDao.deleteStall(stallId);
-        System.out.println(i);
-        if(i != 0){
-            bool = true;
-            return bool;
+        try {
+            int i =stallDao.deleteStall(stallId);
+            if(i != 0){
+                bool = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return  bool;
     }

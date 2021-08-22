@@ -12,4 +12,45 @@
     </association>
   </resultMap>
 
+  <select id="findAll" resultMap="PropertyFeeMap">
+    select * from t_propertyfee
+  </select>
+
+  <select id="findPfByPfId" parameterType="int" resultMap="PropertyFeeMap">
+    select * from t_propertyfee where pf_id = #{pfId}
+  </select>
+
+  <select id="findPfByPfState" parameterType="int" resultMap="PropertyFeeMap">
+    select * from t_propertyfee where pf_state = #{pfState}
+  </select>
+
+  <select id="findPfByPfType" parameterType="int" resultMap="PropertyFeeMap">
+    select * from t_propertyfee where pf_type = #{pfType}
+  </select>
+
+  <select id="findPfByRudId" parameterType="int" resultMap="PropertyFeeMap">
+    select * from t_propertyfee where pf_rudid = #{pfRudid}
+  </select>
+
+  <update id="updatePf" parameterType="cn.com.wy.entity.PropertyFee">
+    update t_propertyfee
+    set pf_state=2
+    where pf_id=#{pfId}
+  </update>
+
+  <insert id="addPf" parameterType="cn.com.wy.entity.PropertyFee">
+    insert into t_propertyfee values(null, #{pfType}, #{pfMoney}, #{pfDate},1, #{rud.rudId})
+  </insert>
+<select id="findPf" parameterType="cn.com.wy.entity.PropertyFee" resultMap="PropertyFeeMap">
+  select * from t_propertyfee
+  <where>
+    <if test="pfState != 0">
+      and pf_state=#{pfState}
+    </if>
+    <if test="pfType != 0">
+      and pf_type=#{pfType}
+    </if>
+  </where>
+</select>
 </mapper>
+    

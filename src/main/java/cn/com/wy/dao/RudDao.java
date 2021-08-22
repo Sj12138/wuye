@@ -1,6 +1,7 @@
 package cn.com.wy.dao;
 
 import cn.com.wy.entity.Rud;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public interface RudDao {
      * @return
      */
     List<Rud> findAllRud();
+
 
     /**
      * 根据业主Id查询房屋
@@ -47,7 +49,7 @@ public interface RudDao {
      * @param rudId
      * @return
      */
-    int deleteRud(int rudId);
+    int deleteRud(@Param("ids") List<Integer> rudId);
 
     /**
      * 条件查询(若传入的只有栋号，则只根据栋号查询对应的房屋)
@@ -55,4 +57,9 @@ public interface RudDao {
      * @return
      */
     List<Rud> findRud(Rud rud);
+    List<Rud> findRid();
+    List<Rud> findUn();
+    List<Rud> findDp();
 }
+
+

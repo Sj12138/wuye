@@ -5,6 +5,12 @@
     <id column="prc_id" property="prcId"/>
     <result column="prc_date" property="prcDate"/>
     <result column="prc_remark" property="prcRemark"/>
+    <result column="prc_pfid" property="pfId"/>
   </resultMap>
-
+<insert id="addPrc" parameterType="cn.com.wy.entity.PayRecords">
+  insert into t_payrecords values(null,#{prcDate},#{propertyFee.pfId},#{prcRemark})
+</insert>
+  <select id="findAll" resultMap="PayRecordsMap">
+    select * from t_payrecords
+  </select>
 </mapper>
