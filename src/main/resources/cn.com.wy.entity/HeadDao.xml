@@ -7,12 +7,12 @@
     <result column="head_card" property="headCard"/>
     <result column="head_sex" property="headSex"/>
     <result column="head_phone" property="headPhone"/>
-<!--    <collection property="rudList" column="head_id"-->
-<!--                select="cn.com.wy.dao.RudDao.findByHeadId">-->
-<!--    </collection>-->
-<!--    <collection property="stallList" column="head_id"-->
-<!--                select="cn.com.wy.dao.StallDao.findByHeadId">-->
-<!--    </collection>-->
+    <collection property="rudList" column="head_id"
+                select="cn.com.wy.dao.RudDao.findByHeadId">
+    </collection>
+    <collection property="stallList" column="head_id"
+                select="cn.com.wy.dao.StallDao.findByHeadId">
+    </collection>
 <!--    <collection property="repairsList" column="head_id"-->
 <!--                select="cn.com.wy.dao.RepairsDao.findByHeadId">-->
 <!--    </collection>-->
@@ -72,5 +72,8 @@
   </delete>
   <select id="findByHeadName" parameterType="String" resultMap="HeadMap">
     select * from t_head where head_name=#{headName}
+  </select>
+  <select id="findByHeadNameLike" parameterType="String" resultMap="HeadMap">
+    select * from t_head where head_name like concat("%",#{headName},"%")
   </select>
 </mapper>

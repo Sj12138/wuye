@@ -62,6 +62,16 @@
                     <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../facility/index?_mid=${secondMenu.id }" iframe="1">公共设施管理</a></li>
                 </ul>
             </div>
+            <div title="车位管理" style="padding:5px;">
+                <ul class="easyui-tree wu-side-tree">
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../stall/list1?_mid=${secondMenu.id }" iframe="1">车位管理</a></li>
+                </ul>
+            </div>
+            <div title="报修管理" style="padding:5px;">
+                <ul class="easyui-tree wu-side-tree">
+                    <li><a href="javascript:void(0)" data-icon="${secondMenu.icon }" data-link="../repairs/list1?_mid=${secondMenu.id }" iframe="1">报修管理</a></li>
+                </ul>
+            </div>
         </div>
     </div>	
     <!-- end of sidebar -->    

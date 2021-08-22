@@ -1,6 +1,9 @@
 package cn.com.wy.dao;
 
 import cn.com.wy.entity.Stall;
+import com.alibaba.druid.support.json.JSONUtils;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -12,7 +15,7 @@ public interface StallDao {
      * 查询所有车位
      * @return
      */
-    List<Stall> findAll();
+    List<Stall> findAll(@Param("stall") Stall stall,@Param("ids") List<Integer> ids);
 
     /**
      * 根据车位Id查询车位
@@ -36,7 +39,7 @@ public interface StallDao {
     List<Stall> findByCarNo(String carNo);
 
     /**
-     * 修改车位信息
+     * 修改车位信息<
      * @param stall
      * @return
      */
@@ -54,5 +57,12 @@ public interface StallDao {
      * @param stallId
      * @return
      */
-    int deleteStall(int stallId);
+    int deleteStall(@Param("stallId") List<Integer> stallId);
+
+    /**
+     * 搜索框 模糊查询 车位
+     */
+    List<Stall> selectLike(Stall stall);
 }
+
+

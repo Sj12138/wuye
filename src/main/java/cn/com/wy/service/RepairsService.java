@@ -12,11 +12,23 @@ public interface RepairsService {
     List<Repairs> findAll();
 
     /**
-     * 根据业主Id查询报修记录
-     * @param HeadId
+     * 模糊查询
      * @return
      */
-    List<Repairs> findByHeadId(int HeadId);
+    List<Repairs> findByLike( Repairs repairs);
+    /**
+     * 根据业主Id查询报修记录
+     * @param headId
+     * @return
+     */
+    List<Repairs> findByHeadId(int headId);
+
+    /**
+     * 根据记录id查询保修记录
+     * @param repId
+     * @return
+     */
+    List<Repairs> findByRepId(int repId);
 
     /**
      * 修改报修记录
@@ -37,5 +49,9 @@ public interface RepairsService {
      * @param repId
      * @return
      */
-    boolean deleteRep(int repId);
+    boolean deleteRep(List<Integer> repId);
+
+
 }
+
+

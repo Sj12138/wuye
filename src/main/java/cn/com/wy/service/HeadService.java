@@ -53,5 +53,5 @@ public interface HeadService {
      * @param headName
      * @return
      */
-    List<Head> findByHeadName(String headName);
+    Head findByHeadName(String headName);
 }

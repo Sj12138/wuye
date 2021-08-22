@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.wy.dao.RepairsDao" >
-  <resultMap id="RepairsMap" type="cn.com.wy.entity.Repairs" >
+<mapper namespace="cn.com.wy.dao.RepairsDao">
+  <resultMap id="RepairsMap" type="cn.com.wy.entity.Repairs">
     <id column="rep_id" property="repId"/>
     <result column="rep_enddate" property="repEndDate"/>
     <result column="rep_startdate" property="repStartDate"/>
@@ -13,4 +13,75 @@
     </association>
   </resultMap>
 
+  <select id="findAll" resultMap="RepairsMap">
+        select *
+        from t_repairs
+    </select>
+
+  <select id="findByHeadId" resultMap="RepairsMap" parameterType="java.lang.Integer">
+        select *
+        from t_repairs
+        where rep_headid = #{headId}
+    </select>
+
+  <select id="findByRepId" resultMap="RepairsMap" parameterType="java.lang.Integer">
+        select *
+        from t_repairs
+        where rep_id = #{repId}
+    </select>
+
+  <update id="updateRep" parameterType="cn.com.wy.entity.Repairs">
+    update t_repairs
+    <set>
+      <if test="repIssue != null">
+        rep_issue = #{repIssue},
+      </if>
+      <if test="repState != null">
+        rep_state = #{repState},
+      </if>
+      <if test="repRemark != null">
+        rep_remark = #{repRemark},
+      </if>
+      <if test="head != null">
+        rep_headId = #{head.headId}
+      </if>
+    </set>
+    where rep_id = #{repId}
+  </update>
+
+  <insert id="addRep" parameterType="Repairs">
+        insert into t_repairs(rep_issue, rep_state, rep_remark, rep_headid)
+        values (#{repIssue}, #{repState}, #{repRemark}, #{head.headId})
+    </insert>
+
+  <delete id="deleteRep" parameterType="java.lang.String">
+    delete
+    from t_repairs
+    where rep_id in
+    <foreach collection="repId" item="id" index="no" open="("
+             separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <select id="findByLike" resultMap="RepairsMap">
+    select * from t_repairs
+    <where>
+      <if test="repairs.repIssue != null">
+        and rep_issue like concat("%",#{repairs.repIssue},"%")
+      </if>
+      <if test="repairs.repState != 0">
+        and rep_state like concat("%",#{repairs.repState},"%")
+      </if>
+      <if test="ids != null and ids.size > 0">
+        and rep_headid in
+        <foreach collection="ids" item="headId" open="("
+                 separator="," close=")">
+          #{headId}
+        </foreach>
+      </if>
+    </where>
+  </select>
+
 </mapper>
+    

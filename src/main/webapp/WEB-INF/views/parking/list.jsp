@@ -8,20 +8,16 @@
             <%@include file="../common/menus.jsp"%>
         </div>
         <div class="wu-toolbar-search">
-            <label>车位名称:</label><input id="search-car_no" class="wu-text" style="width:100px">
+            <label>车位名称:</label><input id="search-name" class="wu-text" style="width:100px">
+            <label>车牌号:</label><input id="search-carno" class="wu-text" style="width:100px">
+            <label>所属业主：</label><input id="search-yezhu" class="wu-text" style="width:100px">
             <label>状态:</label>
             <select id="search-status" class="easyui-combobox" panelHeight="auto" style="width:120px">
-            	<option value="">全部</option>
-            	<option value="0">已售</option>
-            	<option value="1">未售</option>
+            	<option value="0">全部</option>
+            	<option value="1">已售</option>
+            	<option value="2">未售</option>
             </select>
-            <label>业主姓名:</label>
-            <select  id="search-yezhu_id" class="easyui-combobox" panelHeight="auto" style="width:120px">
-            	<option value="">全部</option>
-            	<c:forEach items="${yezhuList }" var="yezhu">
-            	<option value="${yezhu.yezhu_id }">${yezhu.yz_name }</option>
-            	</c:forEach>
-            </select>
+
             <a href="#" id="search-btn" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
         </div>
     </div>
@@ -30,64 +26,65 @@
 </div>
 <!-- 添加弹框 -->
 <div id="add-dialog" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:420px; padding:10px;">
-	<form id="add-form" method="post">
+	<form id="add-form" method="post"  >
         <table>
             <tr>
-                <td align="right">车位名称:</td>
-                <td><input type="text" id="add-park_no" name="park_no" class="wu-text easyui-validatebox"  /></td>
+                <td align="right" >车位名称:</td>
+                <td><input type="text" id="add-stallName" name="stallName" class="wu-text easyui-validatebox"  /></td>
+            </tr>
+            <tr>
+                <td align="right">车牌号:</td>
+                <td><input type="text" id="add-stallCarNo" name="stallCarNo" class="wu-text easyui-validatebox"  /></td>
+            </tr>
+            <tr>
+                <td align="right">所属业主:</td>
+                <td><input type="text" id="add-head" name="head.headName" class="wu-text easyui-validatebox"  /></td>
             </tr>
             <tr>
                 <td align="right">状态:</td>
                 <td>
-               		 <select id="add-status" name="status" class="easyui-combobox" panelHeight="auto" style="width:268px">
-            			<option value="0">已售</option>
+               		 <select id="add-stallState" name="stallState" class="easyui-combobox" panelHeight="auto" style="width:268px">
+            			<option value="2">已售</option>
             			<option value="1">未售</option>
           		 	 </select>
 				</td>
             </tr>
             <tr>
                 <td align="right">备注:</td>
-                <td><textarea id="add-remark" name="remark" rows="6" class="wu-textarea" style="width:260px"></textarea></td>
+                <td><textarea id="add-stallRemark" name="stallRemark" rows="6" class="wu-textarea" style="width:260px"></textarea></td>
             </tr>
         </table>
     </form>
 </div>
 <!-- 修改窗口 -->
 <div id="edit-dialog" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:450px; padding:10px;">
-	<form id="edit-form" method="post">
-        <input type="hidden" name="park_id" id="edit-park_id">
+	<form id="edit-form" method="post" >
+        <input type="hidden" name="stallId" id="edit-stallId">
         <table>
             <tr>
-                <td align="right">车位名称:</td>
-                <td><input type="text" id="edit-park_no" name="park_no" class="wu-text easyui-validatebox"  /></td>
+                <td align="right" style="width:60px">车位名称:</td>
+                <td><input type="text" id="edit-stallName" name="stallName" class="wu-text easyui-validatebox"  /></td>
             </tr>
             <tr>
                 <td align="right">车牌号:</td>
-                <td><input type="text" id="edit-car_no" name="car_no" class="wu-text easyui-validatebox"  /></td>
+                <td><input type="text" id="edit-stallCarNo" name="stallCarNo" class="wu-text easyui-validatebox" /></td>
             </tr>
             <tr>
-            <td align="right">停车场姓名:</td>
-            <td> 
-             <select  id="edit-yezhu_id" name="yezhu_id" class="easyui-combobox" panelHeight="auto" style="width:120px">
-            	<option value="">空空</option>
-            	<c:forEach items="${yezhuList }" var="yezhu">
-            	<option value="${yezhu.yezhu_id }">${yezhu.yz_name }</option>
-            	</c:forEach>
-            </select>
-            </td>
+                 <td align="right">业主姓名:</td>
+                <td><input type="text" id="edit-headName" name="head.headName" class="wu-text easyui-validatebox"  style="width: 260px" /></td>
             </tr>
                  <tr>
                 <td align="right">状态:</td>
                 <td>
-               		 <select id="edit-status" name="status" class="easyui-combobox" panelHeight="auto" style="width:268px">
-            			<option value="0">已售</option>
-            			<option value="1">未售</option>
+               		 <select id="edit-stallState" name="stallState" class="easyui-combobox" panelHeight="auto" style="width:268px">
+            			<option value="1">已售</option>
+            			<option value="2">未售</option>
           		 	 </select>
 				</td>
             </tr>
             <tr>
                 <td align="right">备注:</td>
-                <td><textarea id="edit-remark" name="remark" rows="6" class="wu-textarea" style="width:260px"></textarea></td>
+                <td><textarea id="edit-stallRemark" name="stallRemark" rows="6" class="wu-textarea" style="width:260px"></textarea></td>
             </tr>
         </table>
     </form>
@@ -107,19 +104,18 @@
 		}
 		var data = $("#add-form").serialize();
 		$.ajax({
-			url:'add',
+			url:'../stall/addStall',
 			dataType:'json',
 			type:'post',
 			data:data,
 			success:function(data){
 				if(data.type == 'success'){
 					$.messager.alert('信息提示','添加成功！','info');
-					$("#add-name").val('');
-					$("#add-yz_name").val('');
-					$("#add-yz_phone").val('');
-					$("#add-yz_email").val('');
-					$("#add-idCard").val('');
-					$("#add-yz_password").val('');
+					$("#add-stallName").val('');
+					$("#add-stallCarNo").val('');
+					$("#add-add-head").val('');
+					$("#add-stallState").val('');
+					$("#add-stallRemark").val('');
 					$('#add-dialog').dialog('close');
 					$('#data-datagrid').datagrid('reload');
 				}else{
@@ -140,7 +136,7 @@
 		}
 		var data = $("#edit-form").serialize();
 		$.ajax({
-			url:'edit',
+			url:'../stall/update',
 			dataType:'json',
 			type:'post',
 			data:data,
@@ -161,31 +157,35 @@
 	/**
 	* 删除记录
 	*/
-	function remove(){
-		$.messager.confirm('信息提示','确定要删除该记录？', function(result){
-			if(result){
-				var item = $('#data-datagrid').datagrid('getSelected');
-				if(item == null || item.length == 0){
-					$.messager.alert('信息提示','请选择要删除的数据！','info');
-					return;
-				}
-				$.ajax({
-					url:'delete',
-					dataType:'json',
-					type:'post',
-					data:{park_id:item.park_id},
-					success:function(data){
-						if(data.type == 'success'){
-							$.messager.alert('信息提示','删除成功！','info');
-							$('#data-datagrid').datagrid('reload');
-						}else{
-							$.messager.alert('信息提示',data.msg,'warning');
-						}
-					}
-				});
-			}	
-		});
-	}
+    function remove(){
+        $.messager.confirm('信息提示','确定要删除该记录？', function(result){
+            if(result){
+                var item = $('#data-datagrid').datagrid('getSelections');
+                if(item == null || item.length == 0){
+                    $.messager.alert('信息提示','请选择要删除的数据！','info');
+                    return;
+                }
+                var ids = '';
+                for(var i=0;i<item.length;i++){
+                    ids += item[i].stallId + ',';
+                }
+                $.ajax({
+                    url:'../stall/delete',
+                    dataType:'json',
+                    type:'post',
+                    data:{ids:ids},
+                    success:function(data){
+                        if(data.type == 'success'){
+                            $.messager.alert('信息提示','删除成功！','info');
+                            $('#data-datagrid').datagrid('reload');
+                        }else{
+                            $.messager.alert('信息提示',data.msg,'warning');
+                        }
+                    }
+                });
+            }
+        });
+    }
 	
 	/**
 	* Name 打开编辑窗口
@@ -214,12 +214,12 @@
             }],
             onBeforeOpen:function(){
             	//$("#add-form input").val('');
-            	$("#edit-park_id").val(item.park_id);
-            	$("#edit-yezhu_id").val(item.yezhu_id);
-            	$("#edit-car_no").val(item.car_no);
-            	$("#edit-park_no").val(item.park_no);
-            	$("#edit-status").combobox('setValue',item.status);
-            	$("#edit-remark").val(item.remark);
+            	$("#edit-stallId").val(item.stallId);
+            	$("#edit-stallName").val(item.stallName);
+            	$("#edit-stallCarNo").val(item.stallCarNo);
+            	$("#edit-headName").val(item.head.headName);
+            	$("#edit-stallState").combobox('setValue',item.stallState);
+            	$("#edit-stallRemark").val(item.stallRemark);
             }
         });
 	}
@@ -253,55 +253,51 @@
 	
 	//搜索按钮监听
 	$("#search-btn").click(function(){
-		var option = {car_no:$("#search-car_no").val()};
+		var option = {stallName:$("#search-name").val(),headName:$("#search-yezhu").val()};
+		var carno = $("#search-carno").val();
 		var status = $("#search-status").combobox('getValue');
-		var yezhu_id = $("#search-yezhu_id").combobox('getValue');
-		if(status != -2){
-			option.status = status;
-		}
-		if(yezhu_id != -3){
-			option.yezhu_id = yezhu_id;
-		}
+            option.stallState = status;
+            option.stallCarNo = carno;
+            // option.yezhu = yezhu;
+
 		$('#data-datagrid').datagrid('reload',option);
-		$('#data-datagrid').datagrid('unselectAll');
 	});
 	/** 
 	* 载入数据
 	*/
 	$('#data-datagrid').datagrid({
-		url:'list',
-		rownumbers:true,
-		singleSelect:true,
-		pageSize:20,           
-		pagination:true,
-		multiSort:true,
-		fitColumns:true,
-		idField:'id',
-	    treeField:'name',
-		fit:true,
+		url:'../stall/select',
+        rownumbers:true,
+        singleSelect:false,
+        pageSize:20,
+        pagination:true,
+        multiSort:true,
+        fitColumns:true,
+        idField:'stallId',
+        treeField:'name',
+        fit:true,
 		columns:[[
 			{ field:'chk',checkbox:true},
-			{ field:'park_no',title:'车位名称',width:100,sortable:true},
-			{ field:'car_no',title:'车牌号',width:100,sortable:true},
-			{ field:'yezhu_id',title:'所属业主',width:100,formatter:function(value,row,index){
-				var yezhuList = $("#search-yezhu_id").combobox('getData');
-				for(var i=0;i<yezhuList.length;i++){
-					if(yezhuList[i].value == value)
-						return yezhuList[i].text;
-				}
+            { field:'stallId',title:'编号',width:100,sortable:true,hidden:true},
+			{ field:'stallName',title:'车位名称',width:100,sortable:true},
+			{ field:'stallCarNo',title:'车牌号',width:100,sortable:true},
+			{ field:'head.headname',title:'所属业主',width:100,
+                formatter:function(value,row,index){
+				    return row['head']['headName']
+
 				}},
-				{ field:'status',title:'状态',width:100,formatter:function(value,row,index){
+				{ field:'stallState',title:'状态',width:100,formatter:function(value,row,index){
 					switch(value){
-						case 0:{
-							return '已售';
+						case 2:{
+							return '未售';
 						}
 						case 1:{
-							return '未售';
+							return '已售';
 						}
 					}
 					return value;
 				}},
-			{ field:'remark',title:'备注',width:200,sortable:true},
+			{ field:'stallRemark',title:'备注',width:200,sortable:true},
 		]]
 	});
 </script>

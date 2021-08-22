@@ -54,5 +54,6 @@ public interface HeadDao {
      * @param headName
      * @return
      */
-    List<Head> findByHeadName(@Param("headName") String headName);
+    Head findByHeadName(@Param("headName") String headName);
+    List<Head> findByHeadNameLike(@Param("headName") String headName);
 }

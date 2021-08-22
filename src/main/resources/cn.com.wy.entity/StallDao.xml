@@ -7,10 +7,92 @@
     <result column="stall_carno" property="stallCarNo"/>
     <result column="stall_state" property="stallState"/>
     <result column="stall_remark" property="stallRemark"/>
-    <result column="rud_doorplate" property="rudDoorplate"/>
     <association property="head" column="stall_headid"
-                select="cn.com.wy.dao.HeadDao.findByHeadId">
+                 select="cn.com.wy.dao.HeadDao.findByHeadId">
     </association>
   </resultMap>
 
+  <select id="findAll1" resultMap="StallMap">
+    select *
+    from t_stall
+  </select>
+
+  <select id="findByStallId" resultMap="StallMap" parameterType="int">
+    select *
+    from t_stall
+    where stall_id = #{stallId}
+  </select>
+
+  <select id="findByHeadId" resultMap="StallMap" parameterType="int">
+    select  *
+    from t_stall
+    where stall_headid = #{headId}
+  </select>
+
+  <select id="findByCarNo" resultMap="StallMap" parameterType="string">
+    select *
+    from t_stall
+    where stall_carno = #{carNo}
+  </select>
+
+  <update id="updateStall" parameterType="cn.com.wy.entity.Stall">
+    update t_stall
+    <set>
+      <if test="stallName != null">
+        stall_name=#{stallName},
+      </if>
+      <if test="head != null">
+        stall_headid=#{head.headId},
+      </if>
+      <if test="stallCarNo != null">
+        stall_carno=#{stallCarNo},
+      </if>
+      <if test="stallState != null">
+        stall_state=#{stallState},
+      </if>
+      <if test="stallRemark != null and stallRemark != ''">
+        stall_remark=#{stallRemark},
+      </if>
+    </set>
+    where stall_id=#{stallId};
+  </update>
+
+  <insert id="addStall" parameterType="cn.com.wy.entity.Stall">
+        insert into
+        t_stall (stall_name,stall_carno,stall_state,stall_remark,stall_headid) values (#{stallName},#{stallCarNo},#{stallState},#{stallRemark},#{head.headId})
+  </insert>
+
+
+  <delete id="deleteStall" parameterType="java.lang.Integer">
+    delete from t_stall
+    where stall_id in
+    <foreach collection="stallId" item="id" index="no" open="("
+             separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+
+  <select id="findAll" resultMap="StallMap">
+    select * from t_stall
+    <where>
+      <if test="stall.stallName != null and stall.stallName!=''">
+        and stall_name like concat("%",#{stall.stallName},"%")
+      </if>
+      <if test="stall.stallCarNo != null and stall.stallCarNo!=''">
+        and stall_carno like concat("%",#{stall.stallCarNo},"%")
+      </if>
+      <if test="ids != null and ids.size > 0">
+        and stall_headid in
+        <foreach collection="ids" item="headId" open="("
+                 separator="," close=")">
+          #{headId}
+        </foreach>
+      </if>
+      <if test="stall.stallState != 0">
+        and stall_state=#{stall.stallState}
+      </if>
+    </where>
+  </select>
 </mapper>
+    

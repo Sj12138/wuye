@@ -62,7 +62,7 @@ public class HeadServiceImpl implements HeadService {
     }
 
     @Override
-    public List<Head> findByHeadName(String headName) {
+    public Head findByHeadName(String headName) {
         return headDao.findByHeadName(headName);
     }
 }
